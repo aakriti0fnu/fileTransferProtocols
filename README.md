@@ -71,10 +71,15 @@ Note:(You'll need at least version 1.66 of the boost library in order to build l
    
 it's not building!
 
-
+- Alternative way is to build libtorrent using docker by switching to `libtorrent/` using command `docker build -f Dockerfile -t libtorrent:latest .`
 ```shell
-sudo docker build -f Dockerfile -t libtorrent:latest .
-
+REPOSITORY                          TAG       IMAGE ID       CREATED         SIZE
+libtorrent                          latest    6a320c0e3eb7   6 hours ago     5.21GB
+```
+The running container using command `docker run --name libtorrent-container -it libtorrent:latest /bin/bash`
+```shell
+root@15e2a9778f03:/src/libtorrent# pwd
+/src/libtorrent
 ```
 
 
