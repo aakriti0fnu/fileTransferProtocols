@@ -5,7 +5,6 @@ def timeit(method):
         ts = time.time()
         result = method(*args, **kw)
         te = time.time()
-        print("{} took {}.".format(method.__name__,time.strftime("%H:%M:%S" , time.gmtime((te - ts))) ))
-        # logging.info(msg= "{} took {}.".format(method.__name__,time.strftime("%H:%M:%S" , time.gmtime((te - ts))) ) )
+        print("{} took {}.".format(method.__name__,te - ts))
         return result
     return timed
