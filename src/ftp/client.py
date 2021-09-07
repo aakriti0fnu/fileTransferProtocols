@@ -1,5 +1,15 @@
-from ftplib import FTP
 import os
+import sys
+from ftplib import FTP
+
+from utility.utils import timeit
+
+@timeit
+def ftp_server_request(filename, ftp, file_to_write):
+    command = f'RETR {filename}'
+    response= ftp.retrbinary(command, file_to_write.write )
+    return response
+
 
 def make_request_ftp_client(IP, port, filename, file_loc_to_write):
     '''
@@ -13,19 +23,18 @@ def make_request_ftp_client(IP, port, filename, file_loc_to_write):
     try:
         ftp = FTP()
         ftp.connect(host=IP, port=port)
-        ftp.login(user="aaakrit", passwd="12345")
+        ftp.login(user="dummy_user", passwd="12345")
         # catch welcome message from server.
         print(ftp.getwelcome())
 
     except Exception:
         raise Exception
 
-    file_to_write = os.path.join(file_loc_to_write, filename)
+    file_to_write = os.path.join(file_loc_to_write, f"retrieved_{filename}")
     client_file = open(file_to_write, 'wb')
 
     # requesting sever for a file and parsing it's response!
-    command = f'RETR {filename}'
-    response= ftp.retrbinary(command, client_file.write )
+    response = ftp_server_request(filename, ftp, client_file)
 
     if response.startswith('226'):
         print('File Transfered!')
@@ -37,9 +46,11 @@ def make_request_ftp_client(IP, port, filename, file_loc_to_write):
 
 
 if __name__=='__main__':
-
-    SERVER_IP = "127.0.0.1" #http://localhost
+    
+    filename = sys.argv[1]
+    file_loc_to_write = sys.argv[2]
+    SERVER_IP = sys.argv[3] # "127.0.0.1" #http://localhost
     SERVER_PORT = 2121
-    filename = '10MB'
-    file_loc_to_write = "/home/aakriti/PycharmProjects/fileTransferProtocols/data/ftp/client"
+    
     make_request_ftp_client( SERVER_IP,SERVER_PORT, filename, file_loc_to_write)
+

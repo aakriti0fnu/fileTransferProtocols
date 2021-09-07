@@ -8,13 +8,13 @@ from src.ftp.client import make_request_ftp_client
 SERVER_IP = "127.0.0.1"  # http://localhost
 HTTP_SERVER_PORT = 8080
 # headers = {'Content-type': 'application/octet-stream'}
-http_loc_to_write = "/home/aakriti/PycharmProjects/fileTransferProtocols/data/http/client"
+http_loc_to_write = "data/http/client"
 
 
 # For FTP
 SERVER_IP = "127.0.0.1"  # http://localhost
 FTP_SERVER_PORT = 2121
-ftp_loc_to_write = "/home/aakriti/PycharmProjects/fileTransferProtocols/data/ftp/client"
+ftp_loc_to_write = "data/ftp/client"
 
 
 # file transfer takes, divide the file size by this time, and record the result
